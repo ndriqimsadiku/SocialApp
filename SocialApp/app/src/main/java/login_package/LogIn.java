@@ -7,10 +7,11 @@ import org.json.JSONObject;
 
 
 public class LogIn {
-    String status;
-    String userID;
-    String fullname;
-    String username;
+
+    String status,userID,fullname,username;
+
+
+
     public LogIn(JSONObject jsonObject) {
         setStatus(jsonObject.optString("status"));
         setUserID(jsonObject.optString("UserID"));

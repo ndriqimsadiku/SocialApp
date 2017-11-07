@@ -55,9 +55,6 @@ public class YourPostActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //super.onActivityResult(requestCode, resultCode, data);
@@ -65,22 +62,16 @@ public class YourPostActivity extends AppCompatActivity {
         try {
             if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
                 Uri selectedImage = data.getData();
-
-
                 Bitmap bitmapImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
 
                 ImageView imageView = (ImageView) findViewById(R.id.image_to_post);
                 imageView.setImageBitmap(bitmapImage);
-
-
             } else {
                 Toast.makeText(getApplicationContext(), "Please pick an image! ", Toast.LENGTH_SHORT).show();
-
             }
         }
         catch (IOException e){
             e.printStackTrace();
         }
-
     }
 }

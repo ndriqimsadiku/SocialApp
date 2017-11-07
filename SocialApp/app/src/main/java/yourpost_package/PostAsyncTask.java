@@ -13,6 +13,7 @@ import apiservice.ApiServices;
 
 public class PostAsyncTask extends AsyncTask<String,String,String> {
     PostCallBack callback;
+
     public PostAsyncTask(PostCallBack callback){
         this.callback=callback;
     }
@@ -24,7 +25,6 @@ public class PostAsyncTask extends AsyncTask<String,String,String> {
 
     protected void onPostExecute(String s) {
         try {
-
             super.onPostExecute(s);
             Log.i("message", s);
             PostResponse postsResponse = new PostResponse(s);

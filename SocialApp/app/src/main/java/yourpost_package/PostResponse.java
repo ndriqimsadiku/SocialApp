@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 public class PostResponse {
 
-
     ArrayList<Posts> post = new ArrayList<>();
 
     public  PostResponse(String s){

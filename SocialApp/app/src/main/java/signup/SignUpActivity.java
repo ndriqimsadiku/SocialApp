@@ -16,34 +16,28 @@ import com.example.hp.socialapp.R;
 import login_package.LoginActivity;
 
 public class SignUpActivity extends AppCompatActivity implements SignUpCallbBack {
-        Button signupButton;
-        EditText nameEdittext;
-        EditText usernameEdittext;
-        EditText passwordEdittext;
+        Button signupButton,goToSignIn;
+        EditText nameEdittext,usernameEdittext,passwordEdittext;
+
         SignUp signUp;
         LinearLayout linearLayout;
-        Button goToSignIn;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             AppPreferences.init(getApplicationContext());
 
             try {
-
                 if (!AppPreferences.getUserId().equals("")) {
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
                 }
-
             }
             catch (NullPointerException e){
                 e.printStackTrace();
             }
 
             super.onCreate(savedInstanceState);
-
             setContentView(R.layout.activity_signup);
-
 
             signupButton = (Button) findViewById(R.id.signup_button);
             goToSignIn = (Button) findViewById(R.id.switch_sign_in);
@@ -85,17 +79,13 @@ public class SignUpActivity extends AppCompatActivity implements SignUpCallbBack
             return usernameEdittext.getText().toString();
         }
         public String getUrl(){
-
             nameEdittext = (EditText) findViewById(R.id.name_edittext);
 
             String fullName = nameEdittext.getText().toString();
-
             String[] name = fullName.split("\\s+");
 
             return "http://appsix.net/paintbook/index.php?RegisterUser=&User="
                     +getUsername() +"&password="+getPassword()+"&Emri="+name[0]+"&Mbiemri="+name[1];
-
-
         }
 
         public boolean fieldChecker(){
@@ -111,7 +101,6 @@ public class SignUpActivity extends AppCompatActivity implements SignUpCallbBack
             }
             return true;
         }
-
 
     @Override
     public void onSignUpResponse(SignUp signUp) {

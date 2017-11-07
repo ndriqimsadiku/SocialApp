@@ -25,14 +25,12 @@ import signup.SignUpActivity;
 
 public class LoginActivity extends Activity implements LoginCallBack{
 
-        EditText loginUsernameEdittext;
-        EditText loginPasswordEdittext;
-        Button SignInButton;
+        EditText loginUsernameEdittext,loginPasswordEdittext;
+        Button SignInButton,goToSignUp;
         RelativeLayout relativeLayout;
         LogIn logIn;
-        Button goToSignUp;
-        @Override
 
+        @Override
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             AppPreferences.init(getApplicationContext());
             try {
@@ -46,13 +44,9 @@ public class LoginActivity extends Activity implements LoginCallBack{
             }
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_login);
+
             SignInButton =(Button)  findViewById(R.id.LogInbutton);
-
             goToSignUp = (Button)findViewById(R.id.ResignUpButton);
-
-
-
-
             SignInButton.setOnClickListener(new View.OnClickListener() {
 
                 @Override
@@ -61,26 +55,21 @@ public class LoginActivity extends Activity implements LoginCallBack{
                     final String status = "success";
 
                     if(fieldChecker()) {
-
                         new LogInAsyncTask(LoginActivity.this).execute(getUrl());
 
                         try {
                             Log.i("Status", logIn.getStatus());
 
                             if (logIn.getStatus().equals(status)) {
-
                                 AppPreferences.saveUserId(logIn.getUserID());
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
-
                                 }
-
                                 else {
                                 Toast.makeText(LoginActivity.this, "Ju keni shenuar te dhenat gabim!",
                                         Toast.LENGTH_SHORT).show();
                             }
-
                         }
                         catch (NullPointerException e){
                             e.printStackTrace();
@@ -88,8 +77,6 @@ public class LoginActivity extends Activity implements LoginCallBack{
                     }
                 }
             });
-
-
             goToSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -97,7 +84,6 @@ public class LoginActivity extends Activity implements LoginCallBack{
                     startActivity(intent);
                 }
             });
-
         }
 
         public String getUrl(){
@@ -109,42 +95,32 @@ public class LoginActivity extends Activity implements LoginCallBack{
             return "http://appsix.net/paintbook/index.php?User="+email+"&Password="+md5Password;
         }
 
-
         public static String md5(final String s) {
-
             final String MD5 = "MD5";
-
 
             try {
                 //md5 hash
-
                 MessageDigest digest = java.security.MessageDigest
                         .getInstance(MD5);
                 digest.update(s.getBytes());
 
                 byte messageDigest[] = digest.digest();
 
-
                 // string hex
                 StringBuilder hexString = new StringBuilder();
 
                 for (byte aMessageDigest : messageDigest) {
-
                     String h = Integer.toHexString(0xFF & aMessageDigest);
 
                     while (h.length() < 2)
                         h = "0" + h;
                     hexString.append(h);
-
                 }
                 return hexString.toString();
-
             }
             catch (NoSuchAlgorithmException e) {
                 e.printStackTrace();
             }
-
-
             return "";
         }
         public boolean fieldChecker() {
@@ -159,14 +135,11 @@ public class LoginActivity extends Activity implements LoginCallBack{
                         return false;
                     }
                 }
-
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Keni Bere nje gabim!", Toast.LENGTH_LONG).show();
             }
             return true;
         }
-
-
         @Override
         public void onLoginResponseCallback(LogIn logIn) {
 

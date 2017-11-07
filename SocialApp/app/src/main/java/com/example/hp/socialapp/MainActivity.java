@@ -32,16 +32,20 @@ public class MainActivity extends AppCompatActivity implements PostCallBack{
             AppPreferences.init(getApplicationContext());
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_neews_feed);
+
             new PostAsyncTask(this).execute(getUrl());
+
             logOut = (TextView) findViewById(R.id.log_out);
             adapter = new PostsAdapter(getLayoutInflater());
             listView = (ListView) findViewById(R.id.list_view);
+
             try{
                 listView.setAdapter(adapter);
             }
             catch (NullPointerException e){
                 e.printStackTrace();
             }
+
             imageButton =(ImageButton) findViewById(R.id.newpost_button);
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements PostCallBack{
                     startActivity(intent);
                 }
             });
+
             logOut.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -59,9 +64,11 @@ public class MainActivity extends AppCompatActivity implements PostCallBack{
                 }
             });
         }
+
         public String getUrl(){
             return "http://appsix.net/paintbook/index.php?GetPostet=&UserID="+AppPreferences.getUserId();
         }
+
         @Override
         public void onPostsResponseCallback(ArrayList<Posts> posts) {
             adapter.setPostsInfos(posts);

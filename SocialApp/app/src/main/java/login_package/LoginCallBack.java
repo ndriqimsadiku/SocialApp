@@ -4,5 +4,4 @@ package login_package;
 
     public interface LoginCallBack {
         void onLoginResponseCallback(LogIn login);
-
     }

@@ -12,10 +12,7 @@ import apiservice.ApiServices;
 
 public class LogInAsyncTask  extends AsyncTask<String,String,String> {
 
-
-
         LoginCallBack callBack;
-
 
         public LogInAsyncTask(LoginCallBack callBack){
             this.callBack=callBack;

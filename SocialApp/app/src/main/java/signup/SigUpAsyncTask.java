@@ -17,7 +17,6 @@ public class SigUpAsyncTask  extends AsyncTask<String,String,String> {
         this.signUpCallbBack=signUpCallbBack;
     }
 
-
     @Override
     protected String doInBackground(String... strings) {
         try{
